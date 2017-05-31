@@ -15,12 +15,20 @@ int main (int argc, char **argv)
 
 	while (ros::ok())
 	{/*{{{*/
-		if (5<time) 
+		if (10<time)
 		{
-			nh.setParam("/move_base/TrajectoryPlannerROS/max_vel_x", 0.5);
-			// nh.setParam("/hogehoge/piyopiyo", 0.5);
+			nh.setParam("/move_base/TrajectoryPlannerROS/max_vel_x", 0.9);
 			ROS_INFO("changed param!");
+			nh.getParam("/move_base/TrajectoryPlannerROS/max_vel_x", vel);
+			ROS_INFO("max_vel_x : %f", vel);
 			time = 0.0;
+
+		}
+		else if (5<time) 
+		{
+			// nh.setParam("/hogehoge/piyopiyo", 0.5);
+			nh.setParam("/move_base/TrajectoryPlannerROS/max_vel_x", 0.3);
+			ROS_INFO("changed param!");
 			nh.getParam("/move_base/TrajectoryPlannerROS/max_vel_x", vel);
 			ROS_INFO("max_vel_x : %f", vel);
 		}
