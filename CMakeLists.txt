@@ -8,7 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
 	actionlib
 	tf
 	mylib
-	# lib2dl
 	)
 
 catkin_package(
