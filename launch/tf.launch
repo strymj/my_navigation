@@ -1,0 +1,10 @@
+<launch>
+
+	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
+
+	<node pkg="rviz" type="rviz" name="rviz" />
+
+	<node pkg="tf" type="static_transform_publisher" name="map2base_link_broadcaster" args="-0.4 -3.1 0 3.1416 0 0 map base_link 100" />
+	<node pkg="tf" type="static_transform_publisher" name="base_link2laser_broadcaster" args="0.15 0 0 0 0 0 base_link laser 100" />
+
+</launch>

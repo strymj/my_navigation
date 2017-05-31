@@ -1,0 +1,7 @@
+<launch>
+
+	<node name="map_server_m30" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m30.yaml" >
+		<remap from="map" to="map" />
+	</node>
+
+</launch>

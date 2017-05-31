@@ -1,0 +1,24 @@
+# --------- base local planner params ----------
+
+TrajectoryPlannerROS:
+    acc_lim_x: 0.2
+    acc_lim_theta: 0.4
+    max_vel_x: 0.9
+    min_vel_x: 0.01
+    max_vel_theta: 1.5
+    min_vel_theta: -1.5
+    min_in_place_rotational_vel: 0.1
+
+    holonomic_robot: false
+
+    yaw_goal_tolerance: 0.05
+    xy_goal_tolerance: 0.1
+
+    pdist_scale: 1.0 
+    gdist_scale: 0.45
+    occdist_scale: 0.01
+
+    meter_scoring: true
+
+    # dwa: true
+

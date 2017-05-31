@@ -1,0 +1,62 @@
+<launch>
+
+	<node name="goal_publisher" pkg="nav_param" type="goal_publisher" output="screen" />
+
+
+	<node name="map_server_0" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_0.yaml" >
+		<remap from="map" to="map_0" />
+	</node>
+
+
+	<node name="map_server_m5" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m5.yaml" >
+		<remap from="map" to="map_m5" />
+	</node>
+	
+	<node name="map_server_m10" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m10.yaml" >
+		<remap from="map" to="map_m10" />
+	</node>
+
+	<node name="map_server_m15" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m15.yaml" >
+		<remap from="map" to="map_m15" />
+	</node>
+
+	<node name="map_server_m20" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m20.yaml" >
+		<remap from="map" to="map_m20" />
+	</node>
+
+	<node name="map_server_m25" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m25.yaml" >
+		<remap from="map" to="map_m25" />
+	</node>
+
+	<node name="map_server_m30" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_m30.yaml" >
+		<remap from="map" to="map_m30" />
+	</node>
+
+
+
+	<node name="map_server_p5" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_p5.yaml" >
+		<remap from="map" to="map_p5" />
+	</node>
+	
+	<node name="map_server_p10" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_p10.yaml" >
+		<remap from="map" to="map_p10" />
+	</node>
+
+	<node name="map_server_p15" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_p15.yaml" >
+		<remap from="map" to="map_p15" />
+	</node>
+
+	<node name="map_server_p20" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_p20.yaml" >
+		<remap from="map" to="map_p20" />
+	</node>
+
+	<node name="map_server_p25" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_p25.yaml" >
+		<remap from="map" to="map_p25" />
+	</node>
+
+	<node name="map_server_p30" pkg="map_server" type="map_server" args="$(find nav_param)/map/tyuukan_p30.yaml" >
+		<remap from="map" to="map_p30" />
+	</node>
+
+
+</launch>
