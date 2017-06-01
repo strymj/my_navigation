@@ -1,9 +1,9 @@
 # --------- base local planner params ----------
 
 TrajectoryPlannerROS:
-    acc_lim_x: 0.2
+    acc_lim_x: 0.05
     acc_lim_theta: 0.4
-    max_vel_x: 0.9
+    max_vel_x: 0.3
     min_vel_x: 0.01
     max_vel_theta: 1.5
     min_vel_theta: -1.5
