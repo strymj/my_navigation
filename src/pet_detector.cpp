@@ -13,7 +13,7 @@ static double pet_d_tolerance = 0.05;
 static double explore_radius = 0.4;
 static double explore_tolerance = pet_d + 0.03;
 
-Lidar2D ld2d;
+sy::Lidar2D ld2d;
 
 sensor_msgs::LaserScan::ConstPtr scan;
 bool scan_subscribed = false;

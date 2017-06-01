@@ -9,7 +9,7 @@
 /*}}}*/
 
 using namespace std;
-Lidar2D ld2d;
+sy::Lidar2D ld2d;
 
 struct Region
 {/*{{{*/
