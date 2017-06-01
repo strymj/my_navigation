@@ -8,7 +8,12 @@ find_package(catkin REQUIRED COMPONENTS
 	actionlib
 	tf
 	mylib
+	image_transport
+	cv_bridge
 	)
+
+find_package(OpenCV REQUIRED)
+include_directories(OpenCV_INCLUDE_DIRS)
 
 catkin_package(
 	#  INCLUDE_DIRS include
@@ -63,6 +68,10 @@ add_executable(mark_detector
 	src/mark_detector.cpp)
 target_link_libraries(mark_detector
 	${catkin_LIBRARIES}
+	${OpenCV_LIBRARIES}
+	mylib_image
+	lept
+	tesseract
 	)
 
 add_executable(mark_sample
