@@ -16,11 +16,25 @@ using namespace std;
 using namespace cv;
 /*}}}*/
 
+string trimText(string text)
+{/*{{{*/
+	for (int i=0; i<text.size(); ++i)
+	{
+		if(text[i] == '\n' || text[i] == ' ')
+		{
+			text.erase(text.begin()+i);
+			--i;
+		}
+	}
+
+	return text;
+}/*}}}*/
+
 int main (int argc, char **argv)
 {/*{{{*/
 	ros::init (argc, argv, "mark_detector");
 	ros::NodeHandle nh("~");
-	ros::Rate looprate (10);
+	ros::Rate looprate (5);
 
 	string tessdata_path_, language_;
 	nh.param("tessdata_path", tessdata_path_, string("/home/yamaji-s"));
@@ -36,18 +50,18 @@ int main (int argc, char **argv)
 	conf.doubles.push_back(double_param);
 	srv_req.config = conf;
 
-	string filepath = "/home/yamaji-s/Pictures/sokudo30.jpg";
-	bool picture = true;
 	cv::Mat frame;
 
-	if (picture) 
+	string filepath = "/home/yamaji-s/Pictures/sokudo30.jpg";
+	// string filepath = "/home/yamaji-s/Pictures/tomare.jpg";
+	// string filepath = "/home/yamaji-s/Pictures/zyoko.jpg";
+	// string filepath = "/home/yamaji-s/Pictures/zyoko.png";
+
+	frame = cv::imread(filepath);
+	if (!frame.data)
 	{
-		frame = cv::imread(filepath);
-		if (!frame.data)
-		{
-			ROS_ERROR("cannot read image");
-			return -1;
-		}
+		ROS_ERROR("cannot read image");
+		return -1;
 	}
 
 	// cv::VideoCapture cap(0);
@@ -57,19 +71,21 @@ int main (int argc, char **argv)
 	// 	return -1;
 	// }
 
+	language_ = "jpn";
 	sy::TextDetection td(tessdata_path_, language_);
 
 	sy::Image::HSV hsv(160,40, 100,255, 140,255);
 	Mat extract;
 	Mat cut;
-	const double cut_ratio_x = 0.55;
-	const double cut_ratio_y = 0.45;
+	const double circle_cut_ratio_x = 0.60;
+	const double circle_cut_ratio_y = 0.45;
+	const double triangle_cut_ratio_x = 0.70;
+	const double triangle_cut_ratio_y = 0.25;
 
 	int now_mark_vel = 0;
 
 	while (ros::ok())
 	{/*{{{*/
-		// if (!picture)
 		// cap >> frame;
 		// resize(frame, frame, cv::Size(), 0.75, 0.75);
 		sy::Image::colorExtract(frame, extract, hsv, 0);
@@ -88,26 +104,29 @@ int main (int argc, char **argv)
 		}
 		if (max_num != -1)
 		{
-			int size_x = llist[max_num].size.x * cut_ratio_x;
-			int size_y = llist[max_num].size.y * cut_ratio_y;
-			int rec_x = llist[max_num].min.x + llist[max_num].size.x*(1.0-cut_ratio_x)/2;
-			int rec_y = llist[max_num].min.y + llist[max_num].size.y*(1.0-cut_ratio_y)/2;
-			Mat cut_img(frame,Rect(rec_x, rec_y, size_x, size_y));
-			cv::imshow("cut", cut_img);
+			int circle_size_x = llist[max_num].size.x * circle_cut_ratio_x;
+			int circle_size_y = llist[max_num].size.y * circle_cut_ratio_y;
+			int circle_rec_x = llist[max_num].min.x + llist[max_num].size.x*(1.0-circle_cut_ratio_x)/2;
+			int circle_rec_y = llist[max_num].min.y + llist[max_num].size.y*(1.0-circle_cut_ratio_y)/2;
+			Mat circle_img(frame, Rect(circle_rec_x, circle_rec_y, circle_size_x, circle_size_y));
 
-			string sokudo = td.textDetection(cut_img, true);
+			int triangle_size_x = llist[max_num].size.x * triangle_cut_ratio_x;
+			int triangle_size_y = llist[max_num].size.y * triangle_cut_ratio_y;
+			int triangle_rec_x = llist[max_num].min.x + llist[max_num].size.x*(1.0-triangle_cut_ratio_x)/2;
+			int triangle_rec_y = llist[max_num].min.y + llist[max_num].size.y*0.16;
+			Mat triangle_img(frame, Rect(triangle_rec_x, triangle_rec_y, triangle_size_x, triangle_size_y));
 
-			for (int i=0; i<sokudo.size(); ++i)
-			{
-				if(sokudo[i] == '\n' || sokudo[i] == ' ')
-				{
-					sokudo.erase(sokudo.begin()+i,sokudo.end());
-					break;
-				}
-			}
+			cv::imshow("cut_circle", circle_img);
+			cv::imshow("cut_triangle", triangle_img);
+
+			string text_circle = trimText(td.textDetection(circle_img, true));
+			string text_triangle = trimText(td.textDetection(triangle_img, true));
+
+			ROS_INFO("text1 \"%s\"", text_circle.c_str());
+			ROS_INFO("text2 \"%s\"", text_triangle.c_str());
 
 			try {
-				int mark_vel = stoi(sokudo);
+				int mark_vel = stoi(text_circle);
 				double max_vel = mark_vel / 100.0;
 				if (0.1 < max_vel && max_vel < 1.2 && mark_vel != now_mark_vel)
 				{
@@ -122,7 +141,6 @@ int main (int argc, char **argv)
 			catch (std::out_of_range e) {}
 
 		}
-		cv::imshow("webcam", frame);
 		cv::imshow("extracted", extract);
 		cv::waitKey(1);
 
