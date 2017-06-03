@@ -24,11 +24,12 @@ int main(int argc, char **argv)
 	ros::Rate looprate(10);
 
 	string csv_path_;
+	double reach_tolerance_;
 	node_.param("csv_path", csv_path_, string("../"));
+	node_.param("reach_tolerance", reach_tolerance_, 0.5);
 	// bool SMOOTH_PATH;
 	// double REACH_TOLERANCE, REACH_TOLERANCE_NARROW = 0.12;
 	// node_.param("smooth_path", SMOOTH_PATH, true);
-	// node_.param("reach_tolerance", REACH_TOLERANCE, 0.5);
 
 	//tell the action client that we want to spin a thread by default
 	MoveBaseClient ac("move_base", true);
@@ -42,10 +43,6 @@ int main(int argc, char **argv)
 	tf::StampedTransform map2base;
 
 	sy::MoveBaseGoal mbg(csv_path_);
-
-	// int GNum = 0;
-	double reach_tolerance = 0.8;
-	// std_msgs::String msg;
 
 	while (ros::ok())
 	{/*{{{*/
@@ -64,7 +61,7 @@ int main(int argc, char **argv)
 				{
 					listener.lookupTransform("/map", "/base_link", ros::Time(0), map2base);
 					double dist = mbg.getGoalDistance(map2base);
-					if (dist < reach_tolerance)
+					if (dist < reach_tolerance_)
 						break;
 				}
 				catch (tf::TransformException ex)

@@ -40,7 +40,7 @@ int main (int argc, char **argv)
 {/*{{{*/
 	ros::init (argc, argv, "mark_detector");
 	ros::NodeHandle nh("~");
-	ros::Rate looprate (5);
+	ros::Rate looprate (10);
 
 	int video_num_;
 	double compression_ratio_;
@@ -55,7 +55,7 @@ int main (int argc, char **argv)
 	dynamic_reconfigure::DoubleParameter double_param;
 	dynamic_reconfigure::Config conf;
 
-	double ratio_x2t = 0.5/0.3;
+	double ratio_x2t = 0.6/0.3;
 
 	double_param.value = 0.0;
 	double_param.name = "max_vel_x";
@@ -176,10 +176,12 @@ int main (int argc, char **argv)
 		if (mark_vel == 0)
 		{
 			conf.doubles[0].value = 0.0;
+			conf.doubles[1].value = 0.0;
+			conf.doubles[2].value = 0.0;
 			srv_req.config = conf;
 			ros::service::call("/move_base/TrajectoryPlannerROS/set_parameters", srv_req, srv_resp);
 			ROS_INFO("set max_vel_x : %f", 0.0);
-			sleep(5);
+			sleep(8);
 			mark_vel = now_mark_vel;
 			now_mark_vel = 0;
 		}
@@ -192,7 +194,7 @@ int main (int argc, char **argv)
 			conf.doubles[2].value = -setvel * ratio_x2t;
 			srv_req.config = conf;
 			ros::service::call("/move_base/TrajectoryPlannerROS/set_parameters", srv_req, srv_resp);
-			ROS_INFO("set max_vel_x : %f", mark_vel/100.0);
+			ROS_INFO("set max_vel_x : %f", setvel);
 			now_mark_vel = mark_vel;
 		}
 
