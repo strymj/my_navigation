@@ -8,7 +8,7 @@
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/demopro2.yaml" />
 	
 	<node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" >
-		<param name="csv_path" value="../researches/catkin_ws/src/my_navigation/goal_csv/goal2.csv"/>
+		<param name="csv_path" value="../researches/catkin_ws/src/my_navigation/goal_csv/goal.csv"/>
 		<param name="reach_tolerance" value="1.1"/>
 	</node>
 

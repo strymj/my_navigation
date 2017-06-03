@@ -25,11 +25,12 @@ int main(int argc, char **argv)
 
 	string csv_path_;
 	double reach_tolerance_;
-	node_.param("csv_path", csv_path_, string("../"));
+	bool smooth_path_;
+	node_.param("csv_path", csv_path_, string("../goal.csv"));
+	node_.param("smooth_path", smooth_path_, true);
 	node_.param("reach_tolerance", reach_tolerance_, 0.5);
-	// bool SMOOTH_PATH;
-	// double REACH_TOLERANCE, REACH_TOLERANCE_NARROW = 0.12;
-	// node_.param("smooth_path", SMOOTH_PATH, true);
+
+	sy::MoveBaseGoal mbg(csv_path_);
 
 	//tell the action client that we want to spin a thread by default
 	MoveBaseClient ac("move_base", true);
@@ -42,18 +43,15 @@ int main(int argc, char **argv)
 	tf::TransformListener listener;
 	tf::StampedTransform map2base;
 
-	sy::MoveBaseGoal mbg(csv_path_);
-
 	while (ros::ok())
 	{/*{{{*/
 
 		move_base_msgs::MoveBaseGoal goal;
 		mbg.makeNextGoal(goal);
-		ROS_INFO("Sending goal");
 		ac.sendGoal(goal);
+		ROS_INFO("Sending goal : %s", mbg.getGoalID().c_str());
 
-		// if (SMOOTH_PATH && GNum+1 < goals.size() && goals[GNum].goal_id != "pole_front")
-		if (1)
+		if (smooth_path_)
 		{/*{{{*/
 			while (ros::ok())
 			{
