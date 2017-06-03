@@ -9,7 +9,9 @@
 
 	<node name="mark_detector" pkg="my_navigation" type="mark_detector" output="screen"/>
 
-	<node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" />
+	<node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" >
+		<param name="csv_path" value="../researches/catkin_ws/src/my_navigation/goal_csv/goal.csv"/>
+	</node>
 
 	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
 
@@ -33,7 +35,7 @@
 
 		<!-- initial pose parameter -->
 		<param name="initial_pose_x" value="0.0"/>
-		<param name="initial_pose_y" value="-0.55"/>
+		<param name="initial_pose_y" value="-0.6"/>
 		<param name="initial_pose_a" value="0.0"/>
 		<param name="initial_cov_xx" value="0.02"/>
 		<param name="initial_cov_yy" value="0.02"/>

@@ -23,11 +23,12 @@ int main(int argc, char **argv)
 	ros::NodeHandle node_("~");
 	ros::Rate looprate(10);
 
+	string csv_path_;
+	node_.param("csv_path", csv_path_, string("../"));
 	// bool SMOOTH_PATH;
 	// double REACH_TOLERANCE, REACH_TOLERANCE_NARROW = 0.12;
 	// node_.param("smooth_path", SMOOTH_PATH, true);
 	// node_.param("reach_tolerance", REACH_TOLERANCE, 0.5);
-	// node_.param("reach_tolerance_narrow", REACH_TOLERANCE_NARROW, 0.15);
 
 	//tell the action client that we want to spin a thread by default
 	MoveBaseClient ac("move_base", true);
@@ -40,7 +41,7 @@ int main(int argc, char **argv)
 	tf::TransformListener listener;
 	tf::StampedTransform map2base;
 
-	sy::MoveBaseGoal mbg("../catkin_ws/src/my_navigation/goal_csv/goal.csv");
+	sy::MoveBaseGoal mbg(csv_path_);
 
 	// int GNum = 0;
 	double reach_tolerance = 0.8;
