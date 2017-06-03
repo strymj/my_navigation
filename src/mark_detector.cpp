@@ -88,7 +88,8 @@ int main (int argc, char **argv)
 		return -1;
 	}
 
-	sy::TextDetection td(tessdata_path_, language_);
+	sy::TextDetection td(tessdata_path_, "eng");
+	sy::TextDetection td_jpn(tessdata_path_, "jpn");
 
 	sy::Image::HSV hsv(160,40, 100,255, 120,255);
 	const double circle_cut_ratio_x = 0.60;
@@ -147,7 +148,7 @@ int main (int argc, char **argv)
 			cv::imshow("cut_triangle", triangle_img);
 
 			string text_c = trimText(td.textDetection(circle_img, true));
-			string text_t = trimText(td.textDetection(triangle_img, true));
+			string text_t = trimText(td_jpn.textDetection(triangle_img, true));
 			// text_t = td.convertEncording(text_t, "UTF-8", "iso-2022-jp");
 
 			// ROS_INFO("text_c \"%s\"", text_c.c_str());
@@ -165,7 +166,7 @@ int main (int argc, char **argv)
 				try {
 					mark_vel = stoi(text_c);
 					double max_vel = mark_vel / 100.0;
-					if (mark_vel%10 != 0 || mark_vel < 20 || 80 < mark_vel)
+					if (mark_vel%10 != 0 || mark_vel < 20 || 100 < mark_vel)
 						mark_vel = now_mark_vel;
 				}
 				catch (std::invalid_argument e) {}

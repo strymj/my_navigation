@@ -9,12 +9,12 @@
 	
 	<node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" >
 		<param name="csv_path" value="../researches/catkin_ws/src/my_navigation/goal_csv/goal2.csv"/>
-		<param name="reach_tolerance" value="1.2"/>
+		<param name="reach_tolerance" value="1.1"/>
 	</node>
 
 	<node name="mark_detector" pkg="my_navigation" type="mark_detector" output="screen" >
 		<param name="tessdata_path" value="../" />
-		<param name="language" value="jpn" />
+		<param name="language" value="eng" />
 		<param name="video_num" value="0" />
 		<param name="compression_ratio" value="4.0" />
 	</node>
