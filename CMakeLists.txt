@@ -76,8 +76,3 @@ target_link_libraries(mark_detector
 	tesseract
 	)
 
-add_executable(mark_sample
-	src/mark_sample.cpp)
-target_link_libraries(mark_sample
-	${catkin_LIBRARIES}
-	)
