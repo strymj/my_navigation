@@ -1,6 +1,7 @@
-# --------- base local planner params ----------
+# ########## base local planner params ##########
 
-TrajectoryPlannerROS:
+# TrajectoryPlannerROS:
+DWAPlannerROS:
     acc_lim_x: 0.1
     acc_lim_theta: 0.3
     max_vel_x: 0.3
@@ -17,8 +18,9 @@ TrajectoryPlannerROS:
     pdist_scale: 0.6 
     gdist_scale: 0.9
     occdist_scale: 0.01
-
-    meter_scoring: true
-
+    
     # dwa: true
+
+    # meter_scoring: true
+
 

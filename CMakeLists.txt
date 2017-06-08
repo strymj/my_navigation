@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 	std_msgs
 	actionlib
 	tf
-	mylib
+	sylib
 	image_transport
 	cv_bridge
 	)
@@ -33,7 +33,7 @@ add_executable(goal_publisher
 	src/goal_publisher.cpp)
 target_link_libraries(goal_publisher
 	${catkin_LIBRARIES}
-	mylib
+	sylib
 	)
 
 # add_executable(map_changer
@@ -56,14 +56,14 @@ add_executable(pet_detector
 	src/pet_detector.cpp)
 target_link_libraries(pet_detector
 	${catkin_LIBRARIES}
-	mylib
+	sylib
 	)
 
 add_executable(ojm_detector
 	src/ojm_detector.cpp)
 target_link_libraries(ojm_detector
 	${catkin_LIBRARIES}
-	mylib
+	sylib
 	)
 
 add_executable(mark_detector
@@ -71,7 +71,7 @@ add_executable(mark_detector
 target_link_libraries(mark_detector
 	${catkin_LIBRARIES}
 	${OpenCV_LIBRARIES}
-	mylib_image
+	sylib_image
 	lept
 	tesseract
 	)

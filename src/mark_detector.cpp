@@ -10,12 +10,12 @@
 #include <opencv2/highgui.hpp>
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
-#include <mylib/ImageProc.h>
-#include <mylib/TextDetection.h>
-using namespace std;
-using namespace cv;
+#include <sylib/ImageProc.h>
+#include <sylib/TextDetection.h>
 /*}}}*/
 
+using namespace std;
+using namespace cv;
 
 string trimText(string text)
 {/*{{{*/
@@ -72,7 +72,6 @@ int main (int argc, char **argv)
 
 	// string filepath = "/home/yamaji-s/Pictures/hyousiki/sokudo30.jpg";
 	// string filepath = "/home/yamaji-s/Pictures/hyousiki/zyoko.png";
-	// string filepath = "/home/yamaji-s/Pictures/hyousiki/tomare.jpg";
 
 	// frame = cv::imread(filepath);
 	// if (!frame.data)
@@ -147,8 +146,8 @@ int main (int argc, char **argv)
 			cv::imshow("cut_circle", circle_img);
 			cv::imshow("cut_triangle", triangle_img);
 
-			string text_c = trimText(td.textDetection(circle_img, true));
-			string text_t = trimText(td_jpn.textDetection(triangle_img, true));
+			string text_c = trimText(td.detection(circle_img, true));
+			string text_t = trimText(td_jpn.detection(triangle_img, true));
 			// text_t = td.convertEncording(text_t, "UTF-8", "iso-2022-jp");
 
 			// ROS_INFO("text_c \"%s\"", text_c.c_str());

@@ -10,8 +10,8 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/String.h>
 #include <actionlib/client/simple_action_client.h>
-#include <mylib/Pt.h>
-#include <mylib/MoveBaseGoal.h>
+#include <sylib/Point.h>
+#include <sylib/MoveBaseGoal.h>
 /*}}}*/
 
 using namespace std;

@@ -2,11 +2,12 @@
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/PointCloud.h>
 #include <tf/transform_listener.h>
-#include <mylib/Lidar2D.h>
+#include <sylib/Lidar2D.h>
+#include <sylib/Point.h>
 
 using namespace std;
 
-static Pt::Pt2d explore_center(-1.0, -3.1);
+sy::Point2D explore_center(-1.0, -3.1);
 static double samepet_tolerance = 0.13;
 static double pet_d = 0.065;
 static double pet_d_tolerance = 0.05;
@@ -25,13 +26,13 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 	scan_subscribed = true;
 }/*}}}*/
 
-vector<Pt::Pt2d> getPetList(tf::StampedTransform& transform)
+vector<sy::Point2D> getPetList(tf::StampedTransform& transform)
 {/*{{{*/
 	double laser_x = transform.getOrigin().getX();
 	double laser_y = transform.getOrigin().getY();
 	double laser_yaw = tf::getYaw(transform.getRotation());
 
-	vector<Pt::Pt2d> list;
+	vector<sy::Point2D> list;
 	ld2d.clustering(0.05, 10);
 
 	for (int i=0; i<ld2d.clusterlist.size(); ++i) {
@@ -42,11 +43,11 @@ vector<Pt::Pt2d> getPetList(tf::StampedTransform& transform)
 			int scan_number = (ld2d.clusterlist[i].N_bgn + ld2d.clusterlist[i].N_end) /2;
 			double norm = scan->ranges[scan_number] + pet_d/2; 
 			double angle = scan->angle_min + scan->angle_increment * scan_number;
-			Pt::Pt2d pet;
+			sy::Point2D pet;
 			pet.x = laser_x + norm * cos(laser_yaw + angle);
 			pet.y = laser_y + norm * sin(laser_yaw + angle);
 			// if in the explore area
-			if (Pt::distance(pet, explore_center) < explore_radius+explore_tolerance) {
+			if (sy::distance(pet, explore_center) < explore_radius+explore_tolerance) {
 				list.push_back(pet);
 			}
 		}
@@ -55,7 +56,7 @@ vector<Pt::Pt2d> getPetList(tf::StampedTransform& transform)
 	return list;
 }/*}}}*/
 
-void publishPointCloud(ros::Publisher& publisher, vector<Pt::Pt2d>& list)
+void publishPointCloud(ros::Publisher& publisher, vector<sy::Point2D>& list)
 {/*{{{*/
 	static int seq = 0;
 	sensor_msgs::PointCloud msg;
@@ -87,8 +88,8 @@ int main(int argc, char **argv)
 
 	// petlist.push_back(explore_center);
 
-	vector<Pt::Pt2d> petlist;
-	vector<Pt::Pt2d> newpetlist;
+	vector<sy::Point2D> petlist;
+	vector<sy::Point2D> newpetlist;
 
 	while (ros::ok()) {
 

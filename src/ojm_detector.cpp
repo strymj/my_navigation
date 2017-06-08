@@ -5,7 +5,7 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/String.h>
 #include <tf/transform_listener.h>
-#include <mylib/Lidar2D.h>
+#include <sylib/Lidar2D.h>
 /*}}}*/
 
 using namespace std;
@@ -13,8 +13,8 @@ sy::Lidar2D ld2d;
 
 struct Region
 {/*{{{*/
-	Pt::Pt2d min;
-	Pt::Pt2d max;
+	sy::Point2D min;
+	sy::Point2D max;
 };/*}}}*/
 
 sensor_msgs::LaserScan::ConstPtr scan;
@@ -43,8 +43,8 @@ bool isOjmExist(Region& region, tf::StampedTransform& transform)
 	ld2d.clustering(0.04, 10);
 
 	for (int i=0; i<ld2d.clusterlist.size(); ++i) {
-		Pt::Pt2d grav = ld2d.clusterlist[i].grav;
-		Pt::Pt2d obstacle;
+		sy::Point2D grav = ld2d.clusterlist[i].grav;
+		sy::Point2D obstacle;
 		obstacle.x = laser_x + grav.x*cos(laser_yaw) - grav.y*sin(laser_yaw);
 		obstacle.y = laser_y + grav.x*sin(laser_yaw) + grav.y*cos(laser_yaw);
 		if (region.min.x<obstacle.x && obstacle.x<region.max.x
