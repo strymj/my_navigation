@@ -2,7 +2,8 @@
 	
 	<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser_broadcaster" args="0.15 0 0 0 0 0 base_link laser 100" />
 
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/aisle_3L4F.yaml" />
+	<!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/aisle_3L4F.yaml" /> -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/demopro.yaml" />
 
 	<!-- <node name="mark_detector" pkg="my_navigation" type="mark_detector" output="screen"/> -->
 
