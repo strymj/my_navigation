@@ -1,4 +1,4 @@
-# ---------- local costmap params ---------
+# ########## local costmap params ##########
 
 local_costmap:
   global_frame: odom
@@ -9,6 +9,6 @@ local_costmap:
   static_map: false
   rolling_window: true
   transform_tolerance: 1.0
-  width: 3.5
-  height: 3.5
+  width: 4.0
+  height: 4.0
   resolution: 0.05

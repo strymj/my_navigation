@@ -4,7 +4,7 @@
 
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/aisle_3L4F.yaml" />
 
-	<node name="mark_detector" pkg="my_navigation" type="mark_detector" output="screen"/>
+	<!-- <node name="mark_detector" pkg="my_navigation" type="mark_detector" output="screen"/> -->
 
 	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
 
