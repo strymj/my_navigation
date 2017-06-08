@@ -5,7 +5,6 @@ local_costmap:
   robot_base_frame: base_link
   update_frequency: 5.0
   publish_frequency: 5.0
-  inflation_radius: 0.25
   static_map: false
   rolling_window: true
   transform_tolerance: 1.0
