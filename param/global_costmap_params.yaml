@@ -1,4 +1,4 @@
-# ---------- global costmap params ----------
+# ########## global costmap params ##########
 
 global_costmap:
   global_frame: map

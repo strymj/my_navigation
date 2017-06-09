@@ -77,8 +77,8 @@
 		<rosparam file="$(find my_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
 		<rosparam file="$(find my_navigation)/param/local_costmap_params.yaml" command="load" />
 		<rosparam file="$(find my_navigation)/param/global_costmap_params.yaml" command="load" />
-		<!-- <rosparam file="$(find my_navigation)/param/base_local_planner_params.yaml" command="load" /> -->
-		<rosparam file="$(find my_navigation)/param/dwa_planner_params.yaml" command="load" />
+		<rosparam file="$(find my_navigation)/param/base_local_planner_params.yaml" command="load" />
+		<!-- <rosparam file="$(find my_navigation)/param/dwa_planner_params.yaml" command="load" /> -->
 	</node>
 
 </launch>

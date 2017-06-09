@@ -1,0 +1,29 @@
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_link
+  update_frequency: 1
+  static_map: false
+  footprint: [[0.74, 0.30], [-0.1, 0.30], [-0.1, -0.30], [0.74, -0.30]]
+  footprint_padding: 0.2
+  plugins:
+    # - {name: person_layer,  type: "social_navigation_layers::ProxemicLayer"}
+    - {name: static_layer, type: 'costmap_2d::StaticLayer'}
+    - {name: obstacle_layer, type: 'costmap_2d::ObstacleLayer'}
+    - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}
+  obstacle_layer:
+    obstacle_range: 10.0
+    raytrace_range: 20.0
+    #footprint: [[x0, y0], [x1, y1], [x2, y2], [x3, y3]]
+  #   #robot_radius: ir_of_robot
+    observation_sources: vlp_laser laser_front laser_back laser_front_fixed laser_back_fixed global_costmap #hokuyo3d_clear hokuyo3d_obstacle   
+
+    hokuyo3d_clear: {sensor_frame: base_link, data_type: PointCloud2, topic: hokuyo3d_clear, marking: false, clearing: true}
+    hokuyo3d_obstacle: {sensor_frame: base_link, data_type: PointCloud2, topic: hokuyo3d_obstacles, marking: true, clearing: false}
+    vlp_laser: {sensor_frame: velodyne, data_type: LaserScan, topic: vlp_laser, marking: true, clearing: true}
+    laser_front: {sensor_frame: laser_front, data_type: LaserScan, topic: scan_front, marking: true, clearing: true}
+    laser_back: {sensor_frame: laser_back, data_type: LaserScan, topic: scan_back, marking: true, clearing: true}
+    laser_front_fixed: {frame: laser_front, data_type: LaserScan, topic: scan_front_fixed, marking: false, clearing: true}
+    laser_back_fixed: {frame: laser_back, data_type: LaserScan, topic: scan_back_fixed, marking: false, clearing: true}
+    global_costmap: {sensor_frame: base_link, data_type: PointCloud2, topic: local_costmap, marking: true, clearing: false}
+  inflation_layer: {inflation_radius: 1, cost_scaling_factor: 0.5 }
+
