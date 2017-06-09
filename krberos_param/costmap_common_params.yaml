@@ -1,0 +1,20 @@
+obstacle_range: 10.0
+raytrace_range: 20.0
+#footprint: [[x0, y0], [x1, y1], [x2, y2], [x3, y3]]
+footprint: [[0.74, 0.30], [-0.15, 0.30], [-0.15, -0.30], [0.74, -0.30]]
+#footprint: [[0.10, 0.20], [-0.250, 0.200], [-0.250, -0.200], [0.10, -0.20]]
+
+#robot_radius: ir_of_robot
+#inflation_radius: 0.1
+observation_sources: hokuyo3d_clear hokuyo3d_obstacle laser_scan_sensor laser_scan_front
+#observation_sources:
+
+# laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+# velodyne_cloud: {sensor_frame: base_link, data_type: PointCloud2, topic: velodyne_obstacles, marking: true, clearing: true}
+hokuyo3d_clear: {sensor_frame: base_link, data_type: PointCloud2, topic: hokuyo3d_clear, marking: false, clearing: true}
+hokuyo3d_obstacle: {sensor_frame: base_link, data_type: PointCloud2, topic: hokuyo3d_obstacles, marking: true, clearing: false}
+vlp_laser: {sensor_frame: velodyne, data_type: LaserScan, topic: vlp_laser, marking: true, clearing: false}
+laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+laser_scan_sensor: {sensor_frame: laser_front, data_type: LaserScan, topic: scan_front, marking: true, clearing: true}
+
+
