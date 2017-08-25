@@ -1,0 +1,9 @@
+<launch>
+	
+	<node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" >
+		<param name="csv_path" value="../researches/catkin_ws/src/my_navigation/goal_csv/test_goal.csv"/>
+		<param name="smooth_path" value="true"/>
+		<param name="reach_tolerance" value="2.0"/>
+	</node>
+	
+</launch>

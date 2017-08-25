@@ -1,28 +1,37 @@
 # ########## trajectory planner params ##########
 
 # TrajectoryPlannerROS:
-DWAPlannerROS:
+# DWAPlannerROS:
+YmgLPROS:
   acc_lim_x: 0.3
+  acc_lim_y: 0.0
   acc_lim_th: 0.3
-  max_vel_x: 0.6
+  max_vel_x: 0.5
   min_vel_x: 0.0
-  max_rot_vel: 0.6
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+  max_trans_vel: 0.5
+  min_trans_vel: 0.0
+  max_rot_vel: 1.0
   min_rot_vel: 0.2
 
-  yaw_goal_tolerance: 0.1
-  xy_goal_tolerance: 0.3
+  holonomic_robot: false
 
-  sim_time: 4.0
+  yaw_goal_tolerance: 0.3
+  xy_goal_tolerance: 0.2
+
+  sim_time: 3.0
   sim_granularity: 0.025
   vx_samples: 3
-  vy_samples: 10
-  vtheta_samples: 20
+  vy_samples: 0
+  vtheta_samples: 21
   controller_frequency: 5.0
 
   path_distance_bias: 32.0
-  goal_distance_bias: 12.0
-  occdist_scale: 1.0
-  forward_point_distance: 0.325
+  goal_distance_bias: 24.0
+  occdist_scale: 0.01
+  # forward_point_distance: 0.325
+  forward_point_distance: 0.0
   stop_time_buffer: 0.2
   scaling_speed: 0.25
   max_scaling_factor: 0.2

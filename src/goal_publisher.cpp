@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 {/*{{{*/
 	ros::init(argc, argv, "goal_publisher");
 	ros::NodeHandle node_("~");
-	ros::Rate looprate(10);
+	ros::Rate looprate(1);
 
 	string csv_path_;
 	double reach_tolerance_;
@@ -47,7 +47,8 @@ int main(int argc, char **argv)
 	{/*{{{*/
 
 		move_base_msgs::MoveBaseGoal goal;
-		mbg.makeNextGoal(goal);
+		if (!mbg.makeNextGoal(goal))
+			break;
 		ac.sendGoal(goal);
 		ROS_INFO("Sending goal : %s", mbg.getGoalID().c_str());
 
