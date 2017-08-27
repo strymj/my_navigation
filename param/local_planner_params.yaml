@@ -6,7 +6,7 @@ YmgLPROS:
   acc_lim_x: 1.0
   acc_lim_y: 0.0
   acc_lim_th: 1.0
-  max_vel_x: 0.8
+  max_vel_x: 0.5
   min_vel_x: 0.0
   max_vel_y: 0.0
   min_vel_y: 0.0
@@ -24,10 +24,10 @@ YmgLPROS:
   sim_granularity: 0.025
   vx_samples: 3
   vy_samples: 0
-  vtheta_samples: 11
+  vtheta_samples: 15
   controller_frequency: 5.0
 
-  path_distance_bias: 10.0
+  path_distance_bias: 32.0
   goal_distance_bias: 24.0
   occdist_scale: 0.01
   # forward_point_distance: 0.325
