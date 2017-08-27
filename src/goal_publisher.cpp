@@ -23,14 +23,15 @@ int main(int argc, char **argv)
 	ros::NodeHandle node_("~");
 	ros::Rate looprate(1);
 
-	string csv_path_;
-	double reach_tolerance_;
-	bool smooth_path_;
-	node_.param("csv_path", csv_path_, string("../goal.csv"));
-	node_.param("smooth_path", smooth_path_, true);
-	node_.param("reach_tolerance", reach_tolerance_, 0.5);
+	string csv_path;
+	bool smooth_path;
+	double reach_tolerance, send_interval;
+	node_.param("csv_path", csv_path, string("../goal.csv"));
+	node_.param("smooth_path", smooth_path, true);
+	node_.param("reach_tolerance", reach_tolerance, 0.5);
+	node_.param("send_interval", send_interval, 3.0);
 
-	sy::MoveBaseGoal mbg(csv_path_);
+	sy::MoveBaseGoal mbg(csv_path);
 
 	//tell the action client that we want to spin a thread by default
 	MoveBaseClient ac("move_base", true);
@@ -51,8 +52,9 @@ int main(int argc, char **argv)
 			break;
 		ac.sendGoal(goal);
 		ROS_INFO("Sending goal : %s", mbg.getGoalID().c_str());
+		ros::Duration(send_interval).sleep();
 
-		if (smooth_path_)
+		if (smooth_path)
 		{/*{{{*/
 			while (ros::ok())
 			{
@@ -60,7 +62,7 @@ int main(int argc, char **argv)
 				{
 					listener.lookupTransform("/map", "/base_link", ros::Time(0), map2base);
 					double dist = mbg.getGoalDistance(map2base);
-					if (dist < reach_tolerance_)
+					if (dist < reach_tolerance)
 						break;
 				}
 				catch (tf::TransformException ex)

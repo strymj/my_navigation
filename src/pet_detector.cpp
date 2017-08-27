@@ -22,7 +22,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 {/*{{{*/
 	// scan = *msg;
 	scan = msg;
-	ld2d.scanPtrRegister(msg);
+	ld2d.setScanPtr(msg);
 	scan_subscribed = true;
 }/*}}}*/
 
@@ -47,7 +47,7 @@ vector<sy::Point2D> getPetList(tf::StampedTransform& transform)
 			pet.x = laser_x + norm * cos(laser_yaw + angle);
 			pet.y = laser_y + norm * sin(laser_yaw + angle);
 			// if in the explore area
-			if (sy::distance(pet, explore_center) < explore_radius+explore_tolerance) {
+			if (pet.distance(explore_center) < explore_radius+explore_tolerance) {
 				list.push_back(pet);
 			}
 		}

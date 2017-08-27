@@ -22,7 +22,7 @@ bool scan_subscribed = false;
 void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 {/*{{{*/
 	scan = msg;
-	ld2d.scanPtrRegister(msg);
+	ld2d.setScanPtr(msg);
 	scan_subscribed = true;
 }/*}}}*/
 

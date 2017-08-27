@@ -90,7 +90,8 @@ int main (int argc, char **argv)
 	sy::TextDetection td(tessdata_path_, "eng");
 	sy::TextDetection td_jpn(tessdata_path_, "jpn");
 
-	sy::Image::HSV hsv(160,40, 100,255, 120,255);
+	sy::Image::HSV hsv_low(160, 100, 120);
+	sy::Image::HSV hsv_high(40, 255, 255);
 	const double circle_cut_ratio_x = 0.60;
 	const double circle_cut_ratio_y = 0.45;
 	const double triangle_cut_ratio_x = 0.70;
@@ -110,7 +111,7 @@ int main (int argc, char **argv)
 	{/*{{{*/
 		cap >> frame;
 		resize(frame, resized, cv::Size(), 1.0/compression_ratio_, 1.0/compression_ratio_);
-		sy::Image::colorExtract(resized, extract, hsv, 0);
+		sy::Image::colorExtract(resized, extract, hsv_low, hsv_high, 0);
 		vector<sy::Image::Regiondata> llist;
 		sy::Image::labeling(extract, llist);
 
