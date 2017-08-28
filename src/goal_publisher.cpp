@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	node_.param("csv_path", csv_path, string("../goal.csv"));
 	node_.param("smooth_path", smooth_path, true);
 	node_.param("reach_tolerance", reach_tolerance, 0.5);
-	node_.param("send_interval", send_interval, 3.0);
+	node_.param("send_interval", send_interval, 0.0);
 
 	sy::MoveBaseGoal mbg(csv_path);
 
