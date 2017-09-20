@@ -1,6 +1,6 @@
 # ########## move base params ##########"
 
-base_global_planner: "ymggp/YmgGPROS"
+base_global_planner: "ymggp/YmgGPHybROS"
 
 # base_local_planner: "dwa_local_planner/DWAPlannerROS"
 base_local_planner: "ymglp/YmgLPROS"
