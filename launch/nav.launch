@@ -77,7 +77,8 @@
 		<rosparam file="$(find my_navigation)/param/local_costmap_params.yaml" command="load" />
 		<rosparam file="$(find my_navigation)/param/global_costmap_params.yaml" command="load" />
 		<rosparam file="$(find ymg_local_planner)/params/ymglp_params.yaml" command="load" />
-		<rosparam file="$(find ymg_global_planner_hybrid)/params/ymggp_hyb_params.yaml" command="load" />
+		<rosparam file="$(find ymggp_bgp)/params/ymggp_bgp_params.yaml" command="load" />
+		<!-- <rosparam file="$(find ymg_global_planner_hybrid)/params/ymggp_hyb_params.yaml" command="load" /> -->
 		<!-- <rosparam file="$(find my_navigation)/param/base_local_planner_params.yaml" command="load" /> -->
 		<!-- <rosparam file="$(find my_navigation)/param/local_planner_params.yaml" command="load" /> -->
 	</node>

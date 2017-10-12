@@ -1,6 +1,8 @@
 # ########## move base params ##########"
 
-base_global_planner: "ymggp/YmgGPHybROS"
+# base_global_planner: "ymggp/YmgGPHybROS"
+# base_global_planner: "global_planner/GlobalPlanner"
+base_global_planner: "ymggp_bgp/YmgGPBGP"
 planner_frequency: 1.0
 
 # base_local_planner: "dwa_local_planner/DWAPlannerROS"

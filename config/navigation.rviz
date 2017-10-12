@@ -5,7 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Frames1
-      Splitter Ratio: 0.658227861
+      Splitter Ratio: 0.430379748
     Tree Height: 518
   - Class: rviz/Selection
     Name: Selection
@@ -195,7 +195,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /move_base/YmgGPROS/plan
+      Topic: /move_base/YmgGPBGP/ymggp_plan
       Unreliable: false
       Value: false
     - Alpha: 1
