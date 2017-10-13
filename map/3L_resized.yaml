@@ -1,0 +1,7 @@
+image: 3L_resized.pgm
+resolution: 0.200000
+origin: [-2.750000, -11.250000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+
