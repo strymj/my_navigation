@@ -2,13 +2,11 @@
 
 obstacle_range: 3.0
 raytrace_range: 5.0
+
+# M1 footprint
 footprint: [[0.19, 0.15], [-0.19, 0.15], [-0.19, -0.15], [0.19, -0.15], [0.19, 0.15]]
-# robot_radius: 0.16
 inflation_radius: 0.5
-# cost_scaling_factor: 10.0
 
 observation_sources: laser_scan_sensor
 laser_scan_sensor: {topic: scan, sensor_frame: laser, data_type: LaserScan, clearing: true, marking: true, inf_is_valid: true}
-# observation_sources: additional_obstacle
-# laser_scan_sensor: {topic: additional_obstacle, sensor_frame: laser, data_type: PointCloud, clearing: false, marking: true}
 

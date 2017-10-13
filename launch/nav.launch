@@ -1,12 +1,7 @@
 <launch>
 
-	<node pkg="tf" type="static_transform_publisher" name="base_link_to_laser_broadcaster" args="0.15 0 0 0 0 0 base_link laser 100" />
 
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/3L.yaml" />
-
-	<!-- <node name="mark_detector" pkg="my_navigation" type="mark_detector" output="screen"/> -->
-
-	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
 
 	<node pkg="ypspur_ros_bridge" type="ypspur_ros_bridge" name="ypspur_ros_bridge" />
 	
@@ -17,70 +12,11 @@
 		<param name="send_interval" value="1.0"/>
 	</node>
 
-	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find my_navigation)/config/navigation.rviz" />
+	<node pkg="tf" type="static_transform_publisher" name="base_link2laser_bc" args="0.15 0 0 0 0 0 base_link laser 100" />
+	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
+	<include file="$(find navigation_sample_files)/launch/amcl.launch"/>
+	<include file="$(find navigation_sample_files)/launch/move_base.launch"/>
 
-	<node pkg="amcl" type="amcl" name="amcl" output="screen">
-		<!-- amcl parameter -->
-		<param name="min_particles" value="300"/>
-		<param name="max_particles" value="3000"/>
-		<param name="kld_err" value="0.01"/>
-		<param name="kld_z" value="0.99"/>
-		<param name="update_min_d" value="0.01"/>
-		<param name="update_min_a" value="0.01"/>
-		<param name="resample_interval" value="1"/>
-		<param name="transform_tolerance" value="0.2" />
-		<param name="recovery_alpha_slow" value="0.0"/>
-		<param name="recovery_alpha_fast" value="0.0"/>
-
-		<!-- initial pose parameter -->
-		<param name="initial_pose_x" value="0.0"/>
-		<param name="initial_pose_y" value="0.0"/>
-		<param name="initial_pose_a" value="0.0"/>
-		<param name="initial_cov_xx" value="0.02"/>
-		<param name="initial_cov_yy" value="0.02"/>
-		<param name="initial_cov_aa" value="0.05"/>
-
-		<param name="gui_publish_rate" value="10.0"/>
-		<param name="use_map_topic" value="true"/>
-		<param name="first_map_only" value="false"/>
-
-		<!-- laser model parameter -->
-		<param name="laser_min_range" value="-1.0"/>
-		<param name="laser_max_range" value="-1.0"/>
-		<param name="laser_max_beams" value="30"/>
-		<param name="laser_z_hit" value="0.9"/>
-		<param name="laser_z_short" value="0.18"/>
-		<param name="laser_z_max" value="0.01"/>
-		<param name="laser_z_rand" value="0.1"/>
-		<param name="laser_sigma_hit" value="0.2"/>
-		<param name="laser_lambda_short" value="0.1"/>
-		<param name="laser_likelihood_max_dist" value="2.0"/>
-		<!-- laser_z_short, laser_z_max, laser_lambda_short are only used when laser_model_type is beam -->
-		<!-- sigma(laser_z_xxx) must be 1 -->
-		<!-- <param name="laser_model_type" value="beam"/> -->
-		<param name="laser_model_type" value="likelihood_field"/>
-
-		<param name="odom_model_type" value="diff"/>
-		<param name="odom_alpha1" value="1.5"/>
-		<param name="odom_alpha2" value="1.5"/>
-		<param name="odom_alpha3" value="2.0"/>
-		<param name="odom_alpha4" value="2.0"/>
-		<!-- <param name="odom_frame_id" value="odom"/> -->
-		<!-- <param name="base_frame_id" value="base_link"/> -->
-		<!-- <param name="global_frame_id" value="map"/> -->
-	</node>
-	
-	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-		<rosparam file="$(find my_navigation)/param/move_base_params.yaml" command="load" />
-		<rosparam file="$(find my_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-		<rosparam file="$(find my_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-		<rosparam file="$(find my_navigation)/param/local_costmap_params.yaml" command="load" />
-		<rosparam file="$(find my_navigation)/param/global_costmap_params.yaml" command="load" />
-		<rosparam file="$(find ymg_local_planner)/params/ymglp_params.yaml" command="load" />
-		<rosparam file="$(find ymggp_bgp)/params/ymggp_bgp_params.yaml" command="load" />
-		<!-- <rosparam file="$(find ymg_global_planner_hybrid)/params/ymggp_hyb_params.yaml" command="load" /> -->
-		<!-- <rosparam file="$(find my_navigation)/param/base_local_planner_params.yaml" command="load" /> -->
-		<!-- <rosparam file="$(find my_navigation)/param/local_planner_params.yaml" command="load" /> -->
-	</node>
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find navigation_sample_files)/rviz_config/navigation.rviz" />
 
 </launch>
