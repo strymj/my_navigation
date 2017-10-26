@@ -24,12 +24,13 @@ int main(int argc, char **argv)
 	ros::Rate looprate(1);
 
 	string csv_path;
-	bool smooth_path;
+	bool smooth_path, repeat;
 	double reach_tolerance, send_interval;
 	node_.param("csv_path", csv_path, string("../goal.csv"));
 	node_.param("smooth_path", smooth_path, true);
 	node_.param("reach_tolerance", reach_tolerance, 0.5);
 	node_.param("send_interval", send_interval, 0.0);
+	node_.param("repeat", repeat, false);
 
 	sy::MoveBaseGoal mbg(csv_path);
 
@@ -48,8 +49,10 @@ int main(int argc, char **argv)
 	{/*{{{*/
 
 		move_base_msgs::MoveBaseGoal goal;
-		if (!mbg.makeNextGoal(goal))
+		bool has_more_goal = mbg.makeNextGoal(goal);
+		if (!repeat && !has_more_goal) {
 			break;
+		}
 		ac.sendGoal(goal);
 		ROS_INFO("Sending goal : %s", mbg.getGoalID().c_str());
 		ros::Duration(send_interval).sleep();
