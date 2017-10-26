@@ -1,6 +1,5 @@
 <launch>
 
-
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/3L.yaml" />
 
 	<node pkg="ypspur_ros_bridge" type="ypspur_ros_bridge" name="ypspur_ros_bridge" />

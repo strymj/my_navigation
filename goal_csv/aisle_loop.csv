@@ -1,0 +1,17 @@
+aisle1,map,7.1,-7.7,0.0
+aisle2,map,6.6,-14.9,0.0
+aisle3,map,5.9,-23.6,0.0
+aisle4,map,5.3,-31.7,0.0
+pole1,map,3.0,-33.0,0.0
+pole2,map,2.2,-34.7,0.0
+pole3,map,3.0,-35.8,0.0
+pole4,map,4.7,-36.0,0.0
+pole5,map,5.6,-34.9,0.0
+aisle4,map,5.3,-31.7,0.0
+aisle3,map,5.9,-23.6,0.0
+aisle2,map,6.6,-14.9,0.0
+aisle1,map,7.1,-7.7,0.0
+stair1,map,9.5,-7.4,0.0
+stair2,map,10.1,-6.6,0.0
+stair3,map,9.5,-5.8,0.0
+start,map,7.1,-6.7,-1.5
