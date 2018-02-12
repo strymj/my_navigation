@@ -1,4 +1,5 @@
-// #include{{{
+#include <sylib_ros/ImageProc.h>
+#include <sylib_ros/TextDetection.h>
 #include <ros/ros.h>
 #include <iostream>
 #include <string>
@@ -10,9 +11,6 @@
 #include <opencv2/highgui.hpp>
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
-#include <sylib/ImageProc.h>
-#include <sylib/TextDetection.h>
-/*}}}*/
 
 using namespace std;
 using namespace cv;

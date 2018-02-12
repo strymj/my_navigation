@@ -1,12 +1,10 @@
-// #include{{{
+#include <sylib_ros/Lidar2D.h>
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
 #include <geometry_msgs/Pose2D.h>
 #include <std_msgs/Float32.h>
 #include <std_msgs/String.h>
 #include <tf/transform_listener.h>
-#include <sylib/Lidar2D.h>
-/*}}}*/
 
 using namespace std;
 sy::Lidar2D ld2d;

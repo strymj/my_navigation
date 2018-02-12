@@ -1,4 +1,5 @@
-// #include /*{{{*/
+#include <sylib_ros/Point.h>
+#include <sylib_ros/MoveBaseGoal.h>
 #include <ros/ros.h>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <move_base_msgs/MoveBaseActionResult.h>
@@ -10,9 +11,6 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/String.h>
 #include <actionlib/client/simple_action_client.h>
-#include <sylib/Point.h>
-#include <sylib/MoveBaseGoal.h>
-/*}}}*/
 
 using namespace std;
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
