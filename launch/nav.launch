@@ -16,7 +16,7 @@
 	<node pkg="tf" type="static_transform_publisher" name="base_link2laser_bc" args="0.15 0 0 0 0 0 base_link laser 100" />
 
 	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
-	<include file="$(find waypoint_publisher)/waypoint_publisher.launch"/>
+	<include file="$(find waypoint_publisher)/launch/waypoint_publisher.launch"/>
 	<include file="$(find navigation_sample_files)/launch/amcl.launch"/>
 	<include file="$(find navigation_sample_files)/launch/move_base.launch"/>
 
