@@ -1,21 +1,22 @@
 <launch>
 
 
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/3L.yaml" />
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_navigation)/map/3L_aisle_north.yaml" />
 
 	<node pkg="ypspur_ros_bridge" type="ypspur_ros_bridge" name="ypspur_ros_bridge" />
 	
 	<!-- <node pkg="tf" type="static_transform_publisher" name="odom2base_link_bc" args="0.15 0 0 0 0 0 odom base_link 100" /> -->
-	<node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" >
-		<param name="csv_path" value="$(find my_navigation)/goal_csv/test_goal.csv"/>
-		<param name="smooth_path" value="true"/>
-		<param name="reach_tolerance" value="5.0"/>
-		<param name="send_interval" value="1.0"/>
-	</node>
+	<!-- <node name="goal_publisher" pkg="my_navigation" type="goal_publisher" output="screen" > -->
+	<!-- 	<param name="csv_path" value="$(find my_navigation)/goal_csv/test_goal.csv"/> -->
+	<!-- 	<param name="smooth_path" value="true"/> -->
+	<!-- 	<param name="reach_tolerance" value="5.0"/> -->
+	<!-- 	<param name="send_interval" value="1.0"/> -->
+	<!-- </node> -->
 
 	<node pkg="tf" type="static_transform_publisher" name="base_link2laser_bc" args="0.15 0 0 0 0 0 base_link laser 100" />
 
 	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
+	<include file="$(find waypoint_publisher)/waypoint_publisher.launch"/>
 	<include file="$(find navigation_sample_files)/launch/amcl.launch"/>
 	<include file="$(find navigation_sample_files)/launch/move_base.launch"/>
 
